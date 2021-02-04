@@ -1,0 +1,24 @@
+{
+  "navigationBarTitleText": "打卡签到",
+  "usingComponents": {
+    "van-field": "/static/vant/field/index",
+    "van-button": "/static/vant/button/index",
+    "van-stepper": "/static/vant/stepper/index",
+    "van-goods-action": "/static/vant/goods-action/index",
+    "van-goods-action-icon": "/static/vant/goods-action-icon/index",
+    "van-goods-action-button": "/static/vant/goods-action-button/index",
+    "van-submit-bar": "/static/vant/submit-bar/index",
+    "van-slider": "/static/vant/slider/index",
+    "van-swipe-cell": "/static/vant/swipe-cell/index",
+    "van-dialog": "/static/vant/dialog/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-radio": "/static/vant/radio/index",
+    "van-radio-group": "/static/vant/radio-group/index",
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-icon": "/static/vant/icon/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index",
+    "van-action-sheet": "/static/vant/action-sheet/index"
+  }
+}
