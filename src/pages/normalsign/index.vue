@@ -75,10 +75,13 @@
           })
         }
       },
+
+      //刷新
       change(item) {
         this.page = item;
         this.getTableList()
       },
+      //获取数据
       getTableList() {
         let _this = this;
         wx.request({
@@ -126,7 +129,8 @@
   .propage {
     display: flex;
     width: 33%;
-    background-color: #a7a388;
+    background-color:#0099ff;
+     /* #a7a388; */
     height: 90rpx;
     align-items: center;
     text-align: center;
@@ -142,7 +146,7 @@
   .nextpage {
     display: flex;
     width: 33%;
-    background-color: #a7a388;
+    background-color: #0099ff;
     align-items: center;
     text-align: center;
     justify-content: center;

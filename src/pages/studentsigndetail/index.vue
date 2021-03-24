@@ -135,6 +135,7 @@
         let _this = this;
         _this.leaveshow = true;
       },
+      //--------请假-----------
       signleave(e) {
         let _this = this;
         if( e.target.index === 0 ) {
@@ -184,6 +185,7 @@
         }
 
       },
+      //-------（老师端）显示学生签到详情------
       signdetiallink() {
         let _this = this;
         if( _this.signing === 1 &&  _this.itemtype === 1) {
@@ -207,6 +209,7 @@
 
         }
       },
+      //--------（老师端）停止签到------
       stopsign() {
         let _this = this;
         wx.request({
@@ -240,6 +243,7 @@
         })
 
       },
+      //---------（老师端）设置开始签到-------------
       beginsign() {
         let _this = this;
         wx.request({
@@ -273,6 +277,7 @@
         })
 
       },
+
       bindclose(e) {
         let _this = this;
         _this.dialogshow = false
@@ -334,31 +339,31 @@
           }
         }
       },
-      // 计算签到距离
+      // 计算签到距离（两地的经纬度距离）
       distance: function (la1, lo1, la2, lo2) {
         var La1 = la1 * Math.PI / 180.0;
         var La2 = la2 * Math.PI / 180.0;
         var La3 = La1 - La2;
         var Lb3 = lo1 * Math.PI / 180.0 - lo2 * Math.PI / 180.0;
         var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(La3 / 2), 2) + Math.cos(La1) * Math.cos(La2) * Math.pow(Math.sin(Lb3 / 2), 2)));
-        s = s * 6378.137;
+        s = s * 6378.137;//乘以地球半径
         s = s * 1000;
         return s;
       },
-      // 定位
+      //------进行定位------
       getLocalInfo: function (num) {
         let _this = this;
         // 进行wifi定位
-        //判断使用平台
+        //判断使用平台（获取手机操作系统）
         wx.getSystemInfo({
           success:function(res){
             if(res.platform == "devtools"){
-              _this.sendtype = 1;
+              _this.sendtype = 1;//PC端
               console.log("PC")
             }else if(res.platform == "ios"){
-              _this.sendtype = 3;
+              _this.sendtype = 3;//ios小程序
             }else if(res.platform == "android"){
-              _this.sendtype = 2;
+              _this.sendtype = 2;//安卓小程序
             }
           }
         })
@@ -366,24 +371,28 @@
         wx.startWifi({
           success (res) {
             wx.getWifiList ({})
-            console.log("success")
+            console.log("success1")
           },
           fail( rse ) {
             console.log( rse )
           }
         })
-        console.log(_this.sendtype)
-        wx.getWifiList({
+        console.log("使用平台"+_this.sendtype)
+        wx.getWifiList({  //请求获取wifi列表
           success( res ) {
-            console.log("success")
+            console.log("success2")
             console.log(res)
           },
           fail(res) {
-            if( res.errCode == 12005 ) {wx.showToast({ title: "请打开wifi开关", icon: 'none', duration:2000 })}
-            else {wx.showToast({ title: res.errMsg , icon: 'none', duration:2000 })}
+            if( res.errCode == 12005 ) {
+              wx.showToast({ title: "请打开wifi开关", icon: 'none', duration:2000 })
+              }
+            else {
+              wx.showToast({ title: res.errMsg , icon: 'none', duration:2000 })
+              }
           }
         })
-        wx.onGetWifiList(function (CALLBACK){
+        wx.onGetWifiList(function (CALLBACK){//监听获取到Wi-Fi列表数据事件
           var wifilist = CALLBACK.wifiList;
           console.log(wifilist)
           if( wifilist.length > 0 ) {
@@ -428,7 +437,7 @@
 
               },
               fail( e ) {
-                // 尝试调用微信接口获取位置信息
+                // （匹配不成功）尝试调用微信接口获取位置信息
                 // 进行微信定位
                 wx.getLocation({
                   type: 'wgs84',
@@ -507,7 +516,7 @@
           })
         }
       },
-      // 定位算法
+      // ---------定位算法(跳转getLocalInfo)-----------
       position: async function() {
         var _this = this;
         if(_this.Row === -1 && _this.Col === -1 ) {
@@ -554,7 +563,7 @@
 
         }
       },
-      //签到
+      //-----签到算法后的签到记录-------
       buySeat: function(){
         var _this = this;
         if(_this.Row === -1 && _this.Col === -1 ) {
@@ -621,12 +630,13 @@
       },
 
     },
+     // 获取签到信息以及座位信息
     onShow() {
       let _this = this;
       _this.accounttype = wx.getStorageSync('accounttype');
       _this.logintype = wx.getStorageSync('accounttype');
       // this.getSignSeatData();
-      // 获取签到信息以及座位信息
+     
       wx.request({
         method: 'POST',
         url: _this.GLOBAL.baseUrl + 'sign/getStudentSignDetial',
@@ -638,6 +648,7 @@
           'token': wx.getStorageSync('token'),
         },
         success (res) {
+          //console.log("sssb")
           let swidth;
           wx.getSystemInfo({
             success: res => {
@@ -646,6 +657,8 @@
           })
           res = res.data;
           console.log(res.data)
+          console.log(res.data.signitem.id)
+          
           if(res.error_code === 0 ) {
             _this.seatArray = res.data.roomseatlist.data;
             _this.classdata = res.data.signitem;
@@ -668,14 +681,14 @@
             _this.endtimeminute = parseInt(res.data.signitem.sign_item_end_time.substring(3,5));
           } else {
             wx.showToast({
-              title: '数据错误',
+              title: '数据错误！',
               icon: 'none',
               duration:2000
             })
           }
         }
       })
-      console.log("logintype" + _this.logintype)
+      console.log("logintype:" + _this.logintype)
       console.log("signing:" + _this.signing)
     }
 

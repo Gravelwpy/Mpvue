@@ -261,14 +261,14 @@
     methods: {
       getwifiinfo() {
         var _this = this;
-        // if( _this.chooseItem.localnamefirst === '' && _this.chooseItem.localnamefirst === '' ) {
-        if( false ) {
+        if( _this.chooseItem.localnamefirst === '' && _this.chooseItem.localnamefirst === '' ) {
+        //if(false) {
           wx.showToast({
-            title: "请选择地点",
+            title: "请选择地点或测试点",
             icon: 'none',
             duration:2000
           })
-        } else {
+        } else{
           var _this = this;
           wx.getSystemInfo({
             success:function(res){
@@ -284,7 +284,7 @@
                 _this.timer = setInterval(async () => {
                   await setTimeout(_this.geiandroidwifiinfo(), 0)
                 }, 3000)
-              }else if(res.platform == "android"){
+              }else if(res.platform == "android"){//安卓微信小程序
                 _this.chooseItem.sendtype = 2;
                 // 初始化计数
                 _this.chooseItem.gettestnumber = 0;
@@ -370,8 +370,8 @@
             })
           }
         }
-        // console.log(_this.chooseItem.gettestnumber);
-        // console.log(_this.chooseItem.testnumber);
+         console.log(_this.chooseItem.gettestnumber);
+         console.log(_this.chooseItem.testnumber);
       },
       onCheckChange(e) {
         console.log(e)
@@ -524,7 +524,7 @@
           _this.chooseItem.roomid === ''
         ) {
           wx.showToast({
-            title: '请按要求填写输入信息1',
+            title: '请按要求填写输入信息',
             icon: 'none',
             duration:2000
           })
@@ -705,7 +705,7 @@
         function initBaiduMap() {
           // 进行定位
           if ('baidumap_location' in window) {
-            alert("定位中。。。");
+            alert("定位中...");
             baidumap_location.getCurrentPosition(function (result) {
               alert(result.latitude);
               alert(result.longitude);

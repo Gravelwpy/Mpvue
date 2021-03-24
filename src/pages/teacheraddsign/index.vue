@@ -3,7 +3,8 @@
     <div class="newitem">
       <div class="group">
         <van-cell title="考勤类型" class="content" :value="chooseItem.type" @click="setItemType" is-link/>
-        <van-cell title="考勤时间" class="content" :value="chooseItem.begintime + '-' + chooseItem.endtime" @click="setItemTime" is-link v-if="chooseItem.typeid === 2"/>
+        <van-cell title="考勤时间" class="content" :value="chooseItem.begintime + '-' + chooseItem.endtime" @click="setItemTime" is-link />
+        <!-- v-if="chooseItem.typeid === 2" -->
       </div>
       <div class="group">
         <van-cell title="参与考勤班级" class="content" :value="chooseItem.classname" @click="selectClass" is-link v-if="chooseItem.typeid === 1"/>
@@ -111,13 +112,14 @@
       v-if="chooseEndTime"
       class="begintime"
       type="time"
-      :min-hour="endMinHour"
-      :min-minute="endMinMinute"
+      
       :value="chooseItem.endtime"
       @input="onInputEnd"
       @confirm="confirmEndTimeChoose"
       @cancel="cancelEndTimeChoose"
     />
+    <!-- :min-hour="endMinHour" -->
+      <!-- :min-minute="endMinMinute" -->
 
   </div>
 </template>
@@ -130,12 +132,12 @@
         // time 
         datatime: [
           { name: '周一'},
-          { name: '周2'},
-          { name: '周3'},
-          { name: '周4'},
-          { name: '周5'},
-          { name: '周6'},
-          { name: '周7'},
+          { name: '周二'},
+          { name: '周三'},
+          { name: '周四'},
+          { name: '周五'},
+          { name: '周六'},
+          { name: '周日'},
         ],
         endMinMinute: 0,
         endMinHour: 0,
@@ -147,7 +149,7 @@
         signtypeshow: false,
         areashow: false,
         localshow: false,
-        defaulttime: new Date(2016, 9, 10, 18, 40),
+        defaulttime: new Date(2021, 9, 10, 18, 40),
         timeshow: false,
         typeshow: false,
         false: false,
@@ -261,7 +263,7 @@
       },
       onSelectTime(obj) {
         let _this = this;
-        if( obj.target.timetype === 0 ) { // 开始时间
+        if( obj.target.timetype === 0 ) { // 设置开始时间
           _this.chooseBeginTime = true;
         } else if( obj.target.timetype === 1 ) { // 设置结束时间
           _this.chooseEndTime = true;
@@ -329,6 +331,7 @@
       nameclose() {
         this.dialogshow = false;
       },
+      //------------获取教室信息------------
       getAllRoom() {
         let _this = this;
           wx.request({
@@ -366,6 +369,7 @@
       testTime() {
         console.log(this.chooseItem.time[0])
       },
+      //---提交签到事项-----
       subMsg() {
         let _this = this;
         if( _this.chooseItem.classid === '' ) {
@@ -394,8 +398,8 @@
           } else {
             let _this = this;
             wx.request({
-              method: 'POSt',
-              url: _this.GLOBAL.baseUrl + 'sign/addSignItem', //仅为示例，并非真实的接口地址
+              method: 'POST',
+              url: _this.GLOBAL.baseUrl + 'sign/addSignItem', 
               data: { 
                 type: _this.chooseItem.typeid,
                 name: _this.chooseItem.name,
@@ -454,6 +458,7 @@
         this.chooseItem.localname = item.target.name + item.target.subname
         this.localshow = false;
       },
+      //----------获取考勤点----------
       getLocalListByName() {
         let _this = this;
           wx.request({
@@ -502,11 +507,12 @@
       setItemName() {
         this.dialogshow = true
       },
+      //-------获取教师对应的班级列表------
       getclasslist() {
         let _this = this;
           wx.request({
             method: 'GET',
-            url: _this.GLOBAL.baseUrl + 'class/miniPrograGetTeacherTeachClass', //仅为示例，并非真实的接口地址
+            url: _this.GLOBAL.baseUrl + 'class/miniPrograGetTeacherTeachClass', 
             data: { },
             header: {
               'content-type': 'application/x-www-form-urlencoded',
@@ -558,7 +564,7 @@
         function initBaiduMap() {
           // 进行定位
           if ('baidumap_location' in window) {
-            alert("定位中。。。");
+            alert("定位中...");
             baidumap_location.getCurrentPosition(function (result) {
               alert(result.latitude);
               alert(result.longitude);

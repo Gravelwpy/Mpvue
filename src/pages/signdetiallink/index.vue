@@ -361,6 +361,7 @@
           let _this = this;
           _this.logintype = wx.getStorageSync('accounttype');
           // this.getSignSeatData();
+          
           // 获取签到信息以及座位信息
            wx.request({
             method: 'POST',

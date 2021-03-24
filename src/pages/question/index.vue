@@ -8,7 +8,7 @@
         placeholder="请简要描述遇到的问题"
         autosize
         @change="onChange"
-        rows=5
+        rows=10
       />
     </van-cell-group>
 

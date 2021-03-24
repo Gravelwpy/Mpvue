@@ -89,7 +89,7 @@
 .circular {
   display: flex;
   position: absolute;
-  background-color: #a7a388;
+  background-color: #0099ff;
   width: 140%;
   height: 800rpx;
   border-radius: 50%;
@@ -113,7 +113,7 @@
   margin-top: 100rpx;
   width: 160rpx;
   height: 160rpx;
-  border-radius: 500px;
+  border-radius: 80px;
 }
 .namecss {
   position: absolute;

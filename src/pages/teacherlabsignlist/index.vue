@@ -132,7 +132,7 @@
   .propage {
     display: flex;
     width: 33%;
-    background-color: #a7a388;
+    background-color: #0099ff;
     height: 90rpx;
     align-items: center;
     text-align: center;
@@ -148,7 +148,7 @@
   .nextpage {
     display: flex;
     width: 33%;
-    background-color: #a7a388;
+    background-color: #0099ff;
     align-items: center;
     text-align: center;
     justify-content: center;

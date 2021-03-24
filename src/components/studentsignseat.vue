@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  // import BMap from 'BMap'
+  //import BMap from 'BMap'
   export default {
     name: 'studentsignseat',
     props: ['seatarray','signtiemid','signitemtype','latitude', 'longitude', 'sign_item_radius'],

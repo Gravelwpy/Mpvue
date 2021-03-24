@@ -340,7 +340,7 @@
             url: _this.GLOBAL.baseUrl + 'sign/getStudentSignDetial',
             data: {
               // signid: JSON.parse(localStorage.getItem('studentsignid'))
-              signid: wx.getStorageSync('signitemid')
+              signid: wx.getStorageSync('signitemid')//缓存
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded',
@@ -370,7 +370,7 @@
                 _this.seatSize = parseInt(parseInt(swidth,10) / _this.seatCol,10) - 1;
               } else {
                   wx.showToast({
-                    title: '数据错误',
+                    title: '数据错误！',
                     icon: 'none',
                     duration:2000
                   })

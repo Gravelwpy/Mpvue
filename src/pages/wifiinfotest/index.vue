@@ -57,6 +57,7 @@
       }
     },
     methods: {
+      //----开始测试-------
       subinfo() {
         var _this = this;
         wx.getSystemInfo({
@@ -73,6 +74,7 @@
               }
           })
       },
+      //-------获取wifi信息------
       getwifiinfo() {
         var _this = this;
         try {
@@ -85,7 +87,6 @@
                 _this.wechatlongitude = res.longitude.toFixed(6)
               },
               fail(res) {
-
                 // console.log(res.errMsg === "getLocation:fail auth deny")
                 if( res.errMsg === "getLocation:fail auth deny" ) {
                   console.log("sole")
@@ -113,7 +114,6 @@
               }
             })
           // 判断wifi是否打开，如否则尝试打开wifi
-
           wx.startWifi({
             success (res) {
               wx.getWifiList ({})
@@ -130,8 +130,10 @@
               console.log(res)
             },
             fail(res) {
-              if( res.errCode == 12005 ) {wx.showToast({ title: "请打开wifi开关", icon: 'none', duration:2000 })}
-              else {wx.showToast({ title: res.errMsg , icon: 'none', duration:2000 })}
+              if( res.errCode == 12005 ) {
+                wx.showToast({ title: "请打开wifi开关", icon: 'none', duration:2000 })}
+              else {
+                wx.showToast({ title: res.errMsg , icon: 'none', duration:2000 })}
             }
           })
           wx.onGetWifiList(function (CALLBACK){
@@ -187,10 +189,10 @@
       },
     },
     created() {
-      // this.getlocallist();
-      // this.deviceManufacturer = device.model;
-      // this.setlat_lot();
-      // setInterval(this.getwifilist, 30000);
+       //this.getlocallist();
+       //this.deviceManufacturer = device.model;
+       //this.setlat_lot();
+       //setInterval(this.getwifilist, 30000);
     },
     mounted() {
 

@@ -212,7 +212,7 @@
         this.studentsex = '女'
       },
       studentnumberchange(event) {
-        var reg=/^[0-9]{10}$/;   /*定义验证表达式*/
+        var reg=/^[0-9]{9}$/;   /*定义验证表达式*/
         if( reg.test(event.mp.detail )) {
           this.studentnumbererror = ''
           this.studentnumber = event.mp.detail
